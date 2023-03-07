@@ -1,5 +1,6 @@
 import os
 from sqlalchemy import create_engine, text
+from api.DBConfig import DBConfig
 
 targetDir = "Stocks"
 
@@ -18,7 +19,7 @@ def populateDatabase():
 
     print("Beginning to populate database..")
     connect_args = {'local_infile': True}
-    url = 'mysql+pymysql://root:Password1!@127.0.0.1/stock_market'
+    url = f"{DBConfig.CONNECTOR_SUBSTR}://{DBConfig.DB_USERNAME}:{DBConfig.DB_PWD}@{DBConfig.DB_HOST_IP}/{DBConfig.DB_NAME}"
     engine = create_engine(url, connect_args=connect_args)
     connection = engine.connect()
 
